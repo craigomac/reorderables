@@ -10,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 //import 'debug.dart';
-//import 'material.dart';
-//import 'material_localizations.dart';
 
 import './passthrough_overlay.dart';
 import './typedefs.dart';
@@ -673,18 +671,15 @@ class _ReorderableWrapContentState extends State<_ReorderableWrapContent>
       // before index+2, which is after the space at index+1.
       void moveAfter() => reorder(index, index + 2);
 
-      final MaterialLocalizations localizations =
-          MaterialLocalizations.of(context);
-
       // If the item can move to before its current position in the list.
       if (index > 0) {
         semanticsActions[CustomSemanticsAction(
-            label: localizations.reorderItemToStart)] = moveToStart;
-        String reorderItemBefore = localizations.reorderItemUp;
+            label: "reorderItemToStart")] = moveToStart;
+        String reorderItemBefore = "reorderItemUp";
         if (widget.direction == Axis.horizontal) {
           reorderItemBefore = Directionality.of(context) == TextDirection.ltr
-              ? localizations.reorderItemLeft
-              : localizations.reorderItemRight;
+              ? "reorderItemLeft"
+              : "reorderItemRight";
         }
         semanticsActions[CustomSemanticsAction(label: reorderItemBefore)] =
             moveBefore;
@@ -692,16 +687,16 @@ class _ReorderableWrapContentState extends State<_ReorderableWrapContent>
 
       // If the item can move to after its current position in the list.
       if (index < widget.children.length - 1) {
-        String reorderItemAfter = localizations.reorderItemDown;
+        String reorderItemAfter = "reorderItemDown";
         if (widget.direction == Axis.horizontal) {
           reorderItemAfter = Directionality.of(context) == TextDirection.ltr
-              ? localizations.reorderItemRight
-              : localizations.reorderItemLeft;
+              ? "reorderItemRight"
+              : "reorderItemLeft";
         }
         semanticsActions[CustomSemanticsAction(label: reorderItemAfter)] =
             moveAfter;
         semanticsActions[
-                CustomSemanticsAction(label: localizations.reorderItemToEnd)] =
+                CustomSemanticsAction(label: "reorderItemToEnd")] =
             moveToEnd;
       }
 
@@ -1075,7 +1070,6 @@ class _ReorderableWrapContentState extends State<_ReorderableWrapContent>
 
   @override
   Widget build(BuildContext context) {
-    assert(debugCheckHasMaterialLocalizations(context));
     // We use the layout builder to constrain the cross-axis size of dragging child widgets.
 //    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
 //    debugPrint('${DateTime.now().toString().substring(5, 22)} reorderable_wrap.dart(1084) $this.build: ');
